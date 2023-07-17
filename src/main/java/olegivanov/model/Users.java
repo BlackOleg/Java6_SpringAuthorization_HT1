@@ -1,8 +1,4 @@
-package olegivanov.controller.model;
-
-import lombok.Data;
-
-import java.util.List;
+package olegivanov.model;
 
 public class Users {
     private static  String user;
