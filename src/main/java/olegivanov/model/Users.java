@@ -1,30 +1,30 @@
 package olegivanov.model;
 
 public class Users {
-    private static  String user;
-    private static  String password;
+    private String user;
+    private String password;
 
     public Users() {
     }
 
-    public static void setUser(String user) {
-        Users.user = user;
+    public Users(String user, String password) {
+        this.user = user;
+        this.password = password;
     }
 
-    public static void setPassword(String password) {
-        Users.password = password;
-    }
-
-    public static String getUser() {
+    public String getUser() {
         return user;
     }
 
-    public static String getPassword() {
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPassword() {
         return password;
     }
 
-    public Users(String user, String password){
-    this.user=user;
-    this.password=password;
-}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
