@@ -14,10 +14,10 @@ import org.testcontainers.junit.jupiter.Container;
 class Java6SpringAuthorizationHt1ApplicationTests {
     @Autowired
     TestRestTemplate restTemplate;
-    @Container
+
     private static final GenericContainer devApp = new GenericContainer<>("devapp")
             .withExposedPorts(8080);
-    @Container
+
     private static final GenericContainer prodApp = new GenericContainer<>("prodapp")
             .withExposedPorts(8081);
 
