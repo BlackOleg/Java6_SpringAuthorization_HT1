@@ -23,14 +23,14 @@ class Java6SpringAuthorizationHt1ApplicationTests {
     private static final GenericContainer<?> devApp = new GenericContainer<>("devapp")
 //            new ImageFromDockerfile().withDockerfile(Paths.get("./Dockerfile")))
             .withExposedPorts(8080)
-            .withEnv("SERVER_PORT", "8080")
-            .withEnv("SERVER_ADDRESS", "localhost");
+            .withEnv("SERVER_PORT", "8080");
+ //           .withEnv("SERVER_ADDRESS", "localhost");
 
     private static final GenericContainer<?> prodApp = new GenericContainer<>("prodapp")
 //            new ImageFromDockerfile().withDockerfile(Paths.get("./Dockerfile")))
             .withExposedPorts(8081)
-            .withEnv("SERVER_PORT", "8081")
-            .withEnv("SERVER_ADDRESS", "localhost");
+            .withEnv("SERVER_PORT", "8081");
+ //           .withEnv("SERVER_ADDRESS", "localhost")
 
     @BeforeAll
 
