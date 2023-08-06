@@ -36,8 +36,8 @@ class Java6SpringAuthorizationHt1ApplicationTests {
 
     public static void setUp() {
       // здесь ошибка,  если раскоментить
-//        devApp.start();
-//        prodApp.start();
+        devApp.start();
+        prodApp.start();
     }
 
     @Test
