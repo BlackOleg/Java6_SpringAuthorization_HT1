@@ -1,5 +1,6 @@
 package olegivanov;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -21,36 +22,43 @@ class Java6SpringAuthorizationHt1ApplicationTests {
     TestRestTemplate restTemplate;
 
     private static final GenericContainer<?> devApp = new GenericContainer<>("devapp")
-//            new ImageFromDockerfile().withDockerfile(Paths.get("./Dockerfile")))
             .withExposedPorts(8080)
             .withEnv("SERVER_PORT", "8080");
- //           .withEnv("SERVER_ADDRESS", "localhost");
+// new ImageFromDockerfile().withDockerfile(Paths.get("./Dockerfile"))
+
 
     private static final GenericContainer<?> prodApp = new GenericContainer<>("prodapp")
-//            new ImageFromDockerfile().withDockerfile(Paths.get("./Dockerfile")))
             .withExposedPorts(8081)
             .withEnv("SERVER_PORT", "8081");
- //           .withEnv("SERVER_ADDRESS", "localhost")
+//             .withEnv("SERVER_ADDRESS", "localhost")
 
     @BeforeAll
-
     public static void setUp() {
-      // здесь ошибка,  если раскоментить
         devApp.start();
         prodApp.start();
+
+    }
+
+    @AfterAll
+    public static void closeUp() {
+        devApp.close();
+        prodApp.close();
     }
 
     @Test
-    void contextLoads() {
-//        ResponseEntity<String> forEntity = restTemplate.getForEntity("http://localhost:" + devApp.getMappedPort(8080), String.class);
-//        System.out.println(forEntity.getBody());
-//        Integer devPort = devApp.getMappedPort(8080);
-//        Integer devExpected = 8080;
-//        Assertions.assertEquals(devExpected, devPort);
-//        Integer prodPort = prodApp.getMappedPort(8081);
-//        Integer prodExpected = 8081;
-//        Assertions.assertEquals(prodExpected, prodPort);
+    void contextLoadsDev() {
+        ResponseEntity<String> forEntity = restTemplate.getForEntity("http://localhost:" + devApp.getMappedPort(8080), String.class);
+        System.out.println(forEntity.getBody());
+        String actualBody = forEntity.getBody();
+        Assertions.assertEquals("Hello from port: 8080", actualBody);
+    }
 
+    @Test
+    void contextLoadsProd() {
+        ResponseEntity<String> forEntity = restTemplate.getForEntity("http://localhost:" + prodApp.getMappedPort(8081), String.class);
+        System.out.println(forEntity.getBody());
+        String actualBody = forEntity.getBody();
+        Assertions.assertEquals("Hello from port: 8081", actualBody);
     }
 
 }
